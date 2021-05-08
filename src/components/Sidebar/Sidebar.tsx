@@ -12,7 +12,7 @@ import './sidebar.scss';
 
 const Sidebar = observer(() => {
     const handleLevelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let val: 'easy' | 'medium' | 'hard' | any = e.target.value;
+        const val: 'easy' | 'medium' | 'hard' | any = e.target.value;
         mainStore.data.level = val;
     };
 

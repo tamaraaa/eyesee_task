@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { makeAutoObservable } from 'mobx';
-import { configure, autorun, toJS } from 'mobx';
+import { configure } from 'mobx';
 
 configure({ enforceActions: 'never' });
 
@@ -23,17 +23,12 @@ interface game_data_t {
 class MainStore {
     constructor() {
         makeAutoObservable(this);
-        autorun(() => {
-            console.log(toJS(this.data.level));
-            console.log(toJS(this.data.randomNum));
-            console.log(toJS(this.data.game_state));
-        });
     }
 
     data: game_data_t = {
         game_state: 'init',
         level: 'medium',
-        randomNum: 1,
+        randomNum: this.number,
         dataSet: {
             'a': { status: 'active', value: 1 },
             'b': { status: 'active', value: 2 },
@@ -67,6 +62,7 @@ class MainStore {
         missedCount: 0,
         leftCount: 0,
     };
+
     get difficultyLevel():number  {
         switch (this.data.level) {
             case 'easy':
@@ -79,11 +75,17 @@ class MainStore {
                 return 3500
           }
     }
+
+    get number():number  {
+       const numbers = Array.from(Array(10).keys())
+       return numbers[Math.floor(Math.random() * numbers.length)]
+    }
+    
     getRandomNum() {
         mainStore.checkLetter(mainStore.data.keyPressed);
         mainStore.data.keyPressed = '';
         let numList = [];
-        
+
         for (const [key, value] of Object.entries(this.data.dataSet)) {
             if (value.status === 'active') {
                 numList.push(value.value);
