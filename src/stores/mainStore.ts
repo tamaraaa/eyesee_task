@@ -67,11 +67,23 @@ class MainStore {
         missedCount: 0,
         leftCount: 0,
     };
-
+    get difficultyLevel():number  {
+        switch (this.data.level) {
+            case 'easy':
+                return 5000;
+            case 'medium':
+                return 3500;
+            case 'hard':
+                return 2000;
+            default:
+                return 3500
+          }
+    }
     getRandomNum() {
         mainStore.checkLetter(mainStore.data.keyPressed);
         mainStore.data.keyPressed = '';
         let numList = [];
+        
         for (const [key, value] of Object.entries(this.data.dataSet)) {
             if (value.status === 'active') {
                 numList.push(value.value);
@@ -93,7 +105,6 @@ class MainStore {
     }
 
     checkLetter(param: string) {
-        console.log('check', param, this.data.randomNum, 'number');
         if (
             this.data.dataSet[param] !== undefined &&
             this.data.dataSet[param].value === this.data.randomNum
