@@ -9,7 +9,7 @@ interface field_t {
     value: number;
 }
 interface game_data_t {
-    game_state: 'init' | 'playing' | 'paused' | 'finnished';
+    gameState: 'init' | 'playing' | 'paused' | 'finnished';
     level: 'easy' | 'medium' | 'hard';
     dataSet: {
         [key: string]: field_t;
@@ -26,7 +26,7 @@ class MainStore {
     }
 
     data: game_data_t = {
-        game_state: 'init',
+        gameState: 'init',
         level: 'medium',
         randomNum: this.number,
         dataSet: {
@@ -95,7 +95,7 @@ class MainStore {
             this.data.randomNum =
                 numList[Math.floor(Math.random() * numList.length)];
         } else {
-            this.data.game_state = 'finnished';
+            this.data.gameState = 'finnished';
             this.data.randomNum = null;
         }
     }
@@ -104,6 +104,9 @@ class MainStore {
         for (const [key, value] of Object.entries(this.data.dataSet)) {
             value.status = 'active';
         }
+        this.data.correctCount = 0;
+        this.data.missedCount = 0;
+        this.data.leftCount = 0;
     }
 
     checkLetter(param: string) {

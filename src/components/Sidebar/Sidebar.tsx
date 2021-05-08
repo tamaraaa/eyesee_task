@@ -21,7 +21,7 @@ const Sidebar = observer(() => {
             <h3 className="Sidebar-wrapper__title">Reflex Game</h3>
 
             <FormControl
-                disabled={mainStore.data.game_state !== 'init'}
+                disabled={mainStore.data.gameState !== 'init'}
                 component="fieldset"
                 className="Sidebar-wrapper__levels"
             >

@@ -10,14 +10,14 @@ const Board = observer(() => {
     const inputElemRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        if (mainStore.data.game_state !== 'playing') return;
+        if (mainStore.data.gameState !== 'playing') return;
 
         let i = setInterval(() => {
             mainStore.getRandomNum();
         }, mainStore.difficultyLevel);
 
         return () => clearInterval(i);
-    }, [mainStore.data.game_state]);
+    }, [mainStore.data.gameState]);
 
     useEffect(() => {
         if (!inputElemRef.current) return;
@@ -27,13 +27,13 @@ const Board = observer(() => {
 
     const renderButtons = () => {
         if (
-            mainStore.data.game_state === 'init' ||
-            mainStore.data.game_state === 'paused'
+            mainStore.data.gameState === 'init' ||
+            mainStore.data.gameState === 'paused'
         ) {
             return (
                 <Button
                     onClick={() => {
-                        mainStore.data.game_state = 'playing';
+                        mainStore.data.gameState = 'playing';
                         if (!inputElemRef.current) return;
                         inputElemRef.current.focus();
                     }}
@@ -44,11 +44,11 @@ const Board = observer(() => {
                 </Button>
             );
         }
-        if (mainStore.data.game_state === 'playing') {
+        if (mainStore.data.gameState === 'playing') {
             return (
                 <>
                     <Button
-                        onClick={() => (mainStore.data.game_state = 'paused')}
+                        onClick={() => (mainStore.data.gameState = 'paused')}
                         variant="outlined"
                         color="primary"
                     >
@@ -57,7 +57,7 @@ const Board = observer(() => {
                     <Button
                         onClick={() => {
                             mainStore.resetGame();
-                            mainStore.data.game_state = 'init';
+                            mainStore.data.gameState = 'init';
                         }}
                         variant="outlined"
                         color="secondary"
@@ -74,7 +74,7 @@ const Board = observer(() => {
                 <span className="Board-wrapper__header__buttons">
                     {renderButtons()}
                 </span>
-                {mainStore.data.game_state !== 'finnished' ? (
+                {mainStore.data.gameState !== 'finnished' ? (
                     <h2>{mainStore.data.randomNum}</h2>
                 ) : (
                     <span style={{ color: 'purple' }}>Game over!</span>
