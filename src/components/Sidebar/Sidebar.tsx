@@ -54,16 +54,17 @@ const Sidebar = observer(() => {
             <div className="Sidebar-wrapper__info">
                 <h4>SCORE</h4>
                 <p className="Sidebar-wrapper__info__hit">
-                    HIT {mainStore.data.correctCount}
+                    {`HIT:  ${mainStore.data.correctCount}`}
                 </p>
                 <p className="Sidebar-wrapper__info__miss">
-                    MISSED {mainStore.data.missedCount}{' '}
+                    {`MISSED:  ${mainStore.data.missedCount}`}
                 </p>
                 <p className="Sidebar-wrapper__info__left">
-                    LEFT{' '}
-                    {Object.keys(mainStore.data.dataSet).length -
+                    {` LEFT:  ${
+                        Object.keys(mainStore.data.dataSet).length -
                         (mainStore.data.correctCount +
-                            mainStore.data.missedCount)}
+                            mainStore.data.missedCount)
+                    }`}
                 </p>
             </div>
         </div>
