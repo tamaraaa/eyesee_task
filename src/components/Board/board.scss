@@ -1,0 +1,52 @@
+.Board-wrapper {
+    width: 65%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    &__header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        h2 {
+            background: purple;
+            font-size: 25px;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+        input {
+            margin: 20px;
+            font-size: 30px;
+            text-align: center;
+        }
+        button {
+            margin: 0 10px;
+        }
+    }
+    &__board {
+        color: black;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 450px;
+        margin-top: 20px;
+        &__item {
+            width: 60px;
+            height: 40px;
+            margin: 10px;
+            text-transform: uppercase;
+        }
+    }
+}
+.correct {
+    color: green;
+}
+.missed {
+    color: red;
+}
